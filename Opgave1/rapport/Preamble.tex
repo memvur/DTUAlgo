@@ -1,0 +1,47 @@
+\documentclass[a4paper,12pt]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[danish]{babel}
+
+\setlength{\parindent}{0cm}
+\usepackage{indentfirst}
+
+
+\usepackage{amsmath}
+
+% Til farver
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{listings}
+
+% Her er nogle random farver jeg godt kan lide
+\definecolor{Brown}{cmyk}{0,0.81,1,0.60}
+\definecolor{OliveGreen}{cmyk}{0.64,0,0.95,0.40}
+\definecolor{CadetBlue}{cmyk}{0.62,0.57,0.23,0}
+\definecolor{lightlightgray}{gray}{0.9}
+
+\lstset{ %
+  backgroundcolor=\color{lightlightgray},
+  basicstyle=\scriptsize\ttfamily,
+  breakatwhitespace=false,
+  breaklines=false,
+  language=matlab,
+  %deletekeywords={...},
+  morekeywords={transpose},
+  escapeinside={\%*}{*)}, % add LaTeX code inside code
+  extendedchars=true,
+  frame=none,
+  numbers=left,
+  numbersep=5pt,
+  numberstyle=\tiny\color{gray},
+  commentstyle=\color{gray},
+  keywordstyle=\color{OliveGreen},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stepnumber=1,
+  tabsize=4,
+}
+
+
+

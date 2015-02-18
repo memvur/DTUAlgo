@@ -1,0 +1,152 @@
+\section*{Opgave 8}
+
+I opgave teksten betragtes et array ad længde $n-1$ 
+som indeholder alle heltal mellem i intervallet $\left[0;n\right]$ 
+foruden et på frhånd ukendt tal. Da ønskes an algoritme som 
+kan finde lige netop det tal som mangler.
+
+
+\section*{8.1}
+
+I første opgave findes det manglende tal ved brug af en ny liste.
+Denne første algoritme laver et nyt array af længde $n$. Dette nye
+array's elementer er af typen 'bool' og sættes som udgangspunkt til 'false'.
+Vi kalder det nye array B og input array A.\\
+
+Algoritmen løber da A igennem, og for hver iteration $i$ sættes 
+$B \left[ A \left[ i \right] \right]$ til 'true'.\\
+
+Efter dette gennemløb kan $B$ gennemløbes og når en indgang 
+har værdien 'false' returneres dette indeks som det manglende tal.\\
+
+Algoritmen er implementeret i C++ og kan ses nedenfor.
+
+
+\begin{lstlisting}[language=C++]
+int find_missing(int *A, int n){
+  
+  /*
+    c0 time for memory alloc
+    n time for setting all to false
+  */
+  std::vector<bool> found(n, false);
+
+
+  /*
+    n-1 for running through the whole array
+  */
+  for (int i = 0; i < n-1; i++){
+    found[A[i]] = true;
+  }
+
+  /*
+    n for running through the whole array
+  */
+  for (int i = 0; i < found.size(); i++){
+    if (!found[i]){
+      return i;
+    }
+  }
+  return 0;
+}
+\end{lstlisting}
+
+
+Algoritmmen bruger følgende tid på operationer
+
+\begin{center}
+\begin{tabular}{| l | l | l |}
+\hline
+$c0$ & konstant tid på allokering af found array'et & linje 7\\
+\hline
+$n$ & $n$ tid på at sætte alle indgange til 'false' & linje 7\\
+\hline
+$n-1$ & $n-1$ På at sætte 'true' i alle fundne tals indgange & linje 13-14\\
+\hline
+$n$ & op til $n$ på at finde det tal som mangler & linje 20-22\\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+Derved er den samlede tid 
+
+\begin{align*}
+T &= c0 + n + n-1 + n = c0 + 3n -1\\
+T &= \Theta (n)
+\end{align*}
+
+
+Mens hukommelses forbruget samtidig er $\Theta (n)$
+
+
+\section*{8.2}
+
+En algoritme der udføre samme opgave implementeres. Denne skal 
+blot bruge $\Theta (n^2)$ tid og $\Theta (1)$ hukommelse.\\
+
+I stedet for at lave et nyt array med $n$ indgange, itereres der blot 
+over alle heltal i intervalet $\left[0 ; n\right]$, hvor der for hvert
+af disse iteration ses om det pågældende tal findes.\\
+
+Algoritmen er igen implkementeret i C++ og kan ses neden på næste side.
+
+
+\begin{lstlisting}[language=C++]
+int find_missing_2(int *A, int n){
+
+  /*
+    only extra veriables
+    bool: 1 byte
+    int : 4 bytes
+    total: 5 bytes - always
+  */
+  int expected_lowest = 0;
+  bool found = false;
+
+  for (int i = 0; i < n - 1; i++){
+    found = false;
+    for (int i = 0; i < n - 1; i++){
+      if (A[i] == expected_lowest){
+        found = true;
+        expected_lowest++;
+        break;
+      }
+    }
+    if (!found){
+      return expected_lowest;
+    }
+  }
+  return 0;
+}
+\end{lstlisting}
+
+\section*{8.3}
+
+Denne gang udnyttes det at summen af alle tal mellem i intervallet
+$\left[ 0; n-1 \right]$ kan skrives som $\frac{n\left( n-1 \right)}{2}$.
+Algoritmen summerer da alle tal i $A$ og trækker det fra den udregnede sum.
+Forskellen mellem de to tal vil da netop have samme værdi som det tal 
+der magler.\\
+
+Da input array'et kun skal løbes igennem en enkelt gang, og de øvrige operationer
+tager konstant tid, vil det endelige tidforbrug være $\Theta (n)$ mens
+ekstra hukommelses forbrug er  $\Theta (1)$\\
+
+Algoritmen kan ses neden for.
+
+\begin{lstlisting}[language=C++]
+int find_missing_3(int *A, int n){
+  int sum_all = (n*(n - 1)) / 2;
+  int sum_real = 0;
+  for (int i = 0; i < n - 1; i++){
+    sum_real += A[i];
+  }
+  return sum_all-sum_real;
+}
+\end{lstlisting}
+
+
+
+
