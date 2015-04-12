@@ -34,22 +34,36 @@ public class Opgave
     }
 
     // Build the graph with relations
-    int n_pers = names.split("\\s").length;
-    int[][] graph_matrix = new int[n_pers][n_pers];
+    /*int n_pers = names.split("\\s").length;
+    boolean[][] graph_matrix = new boolean[n_pers][n_pers];
     for (int i = 0; i < relations.length; i++){
       String[] tokens = relations[i].split("\\s");
       int a = Integer.parseInt(tokens[0]);
       int b = Integer.parseInt(tokens[1]);
       if (a <= n_pers && b <= n_pers){
-        graph_matrix[a][b] = 1;
-        graph_matrix[b][a] = 1;
+        graph_matrix[a][b] = true;
+        graph_matrix[b][a] = true;
+      }
+    }*/
+    int n_pers = names.split("\\s").length;
+    ArrayList< ArrayList<Integer> > graph_list = new ArrayList< ArrayList<Integer> >(n_pers);
+    for (int i = 0; i < n_pers; i++) {
+      graph_list.add(new ArrayList<Integer>());
+    }
+    for (int i = 0; i < relations.length; i++){
+      String[] tokens = relations[i].split("\\s");
+      int a = Integer.parseInt(tokens[0]);
+      int b = Integer.parseInt(tokens[1]);
+      if (a <= n_pers && b <= n_pers){
+        graph_list.get(a).add(b);
+        graph_list.get(b).add(a);
       }
     }
 
     for (int i = 0; i < kaede.length-1; i++){
       for (int j = i+1; j < kaede.length; j++){
         if (kaede[i] <= n_pers && kaede[j] <= n_pers){
-          if (graph_matrix[kaede[i]][kaede[j]] == 0){
+          if (!graph_list.get(kaede[i]).contains(kaede[j])){
             System.out.println("nej");
             return;
           }
