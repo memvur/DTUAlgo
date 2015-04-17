@@ -1,0 +1,135 @@
+\section{Assignemt 2}
+
+
+\subsection{Problem}
+
+The input is given in the same way as in the prior assignment.
+The algorithm for this assignment is to find out if a set 
+of persons $X = {x_0, x_1, \dots, x_t}, \; X \subset P$  in the network is 
+in a close friendship.
+Any such subset is is said to be a close friendship if any person in $X$
+has a friendship relation to \textit{all other} persons in $X$. An example
+of a close friendship can be seen in figure \ref{fig:closefship}.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=0.7, auto,swap]
+    \coordinate (c0) at (3, 0);
+    \coordinate (c1) at (-3, -3);
+    \coordinate (c2) at (0, 0);
+    \coordinate (c3) at (3, -3);
+    \coordinate (c4) at (-3, 3);
+    \coordinate (c5) at (3, 3);
+    \coordinate (c6) at (0, 6);
+
+    \node[circle, draw, minimum size=\noderad] (v0) at (c0) {0};
+    \node[circle, draw, minimum size=\noderad] (v1) at (c1) {1};
+    \node[circle, draw, minimum size=\noderad] (v2) at (c2) {2};
+    \node[circle, draw, minimum size=\noderad] (v3) at (c3) {3};
+    \node[circle, draw, minimum size=\noderad] (v4) at (c4) {4};
+    \node[circle, draw, minimum size=\noderad] (v5) at (c5) {5};
+    \node[circle, draw, minimum size=\noderad] (v6) at (c6) {6};
+
+    \draw [-] (v1) -- (v2);
+    \draw [-, very thick, color=red] (v1) -- (v4);
+
+    \draw [-] (v2) -- (v3);
+    \draw [-] (v2) -- (v0);
+    \draw [-, very thick, color=red] (v2) -- (v4);
+    \draw [-, very thick, color=red] (v2) -- (v1);
+
+    \draw [-] (v3) .. controls (5,-1) and (5, 1) .. (v5);
+
+    \draw [-] (v4) -- (v5);
+
+    \draw [-] (v5) -- (v6);
+
+
+
+\end{tikzpicture}
+\caption{Close frindship between node 1,2 and 4 \label{fig:closefship}}
+\end{figure}
+
+
+\subsection{Algorithm}
+
+In the source code, the function that determines if a set of
+people are in a close friendship is named \textit{taet\_venskab}.
+The pseudocode can be seen in figure \ref{fig:cla}.\\
+
+\begin{figure}[ht]
+\hrule
+\vspace{0.2cm}
+{\centering  \textit{taet\_venskab}}
+\vspace{0.2cm}
+\hrule
+\begin{algorithmic}
+\Function{taet\_venskab}{P, V, X} 
+\State $G = $ \Call{incidentList}{P,V}
+\State $t = X.length$
+\For{$i = 0$ to $t-1$}
+	\For{$j = i+1$ to $t-1$}
+		\If{\textbf{not} $X[j] \in G[X[i]]$}
+			\State \Return "nej"
+		\EndIf
+	\EndFor
+\EndFor
+\State \Return "ja"
+\EndFunction
+\end{algorithmic}
+\hrule
+\caption{Close friendship algorithm \label{fig:cla}}
+\end{figure}
+
+
+The Algorithm uses an incident list to represent the graph and albiet 
+occuring in the algorithm, the creation of theincident list is not 
+accounted for in the complexity analasys.\\
+
+To compute Weather the people are in a close friendship, the algorithm
+check for each person if that person has an edge in the graph to
+every other person in the graph. If, at any point the algorithm encounters
+a person that lacks a edge to another person, the algorithm returns with "nej",
+otherwise, the algorithm returns "yes".
+
+\subsection{Complexity}
+
+As mentioned before, the complexity analasys does not account for the 
+time it takes to build the incident list of the graph. However, this
+is assumed to $\Theta \left( V + P \right)$.\\
+
+In the core algorithm, there are two loops. The code of the 
+inner-for loop can be seen much like how \textbf{BubbleSort}
+runs. The amount of times the inner-loops code is executed is
+
+\begin{align*}
+t-1 + t-2 + \dots + t-t &= \sum^{t-1}_{i=0} i \\
+ & = \frac{t^2-t}{2} \in \Theta \left( t^2 \right)
+\end{align*} 
+
+Inside the loop, the \textbf{if} statement checks if
+the incident list of index $i$ contains an edge to $person$
+$x_j$. In worst case, this would require traversing through 
+alledges of $G[X[i]]$, thus, this operation takes $deg(x_i)$.
+In a worst case scenario, would be $P$ as $x_i$ could
+have at most once relation to all other persons in the 
+network.
+
+\begin{align*}
+T(P, V, N, t) &= \Theta \left( t^2 \cdot P \right)
+\end{align*}
+
+Again, this only accounts for the croe algorithm, and not 
+the overhead of constructing the graph representation.\\
+
+If a matrix were used to represent the graph, the runtime could have
+been reduced to $\Theta \left( t^2 \right)$ due to random access
+lookup for edges. However, a matrix representation of the graph 
+prooved too costly regarding memory usage.
+
+
+
+
+
+
+

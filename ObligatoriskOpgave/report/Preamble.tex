@@ -1,0 +1,73 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+
+\setlength{\parindent}{0cm}
+\usepackage{indentfirst}
+
+\usepackage{hyperref}
+
+\usepackage{amsmath}
+
+\usepackage{amssymb}
+
+\usepackage{tikz}   %TikZ is required for this to work.  Make sure this exists before the next line
+\usepackage{tikz-3dplot}
+\usetikzlibrary{calc}
+
+\usepackage{float}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+
+\usepackage{bm}
+
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+% Til farver
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{listings}
+
+% Her er nogle random farver jeg godt kan lide
+\definecolor{Brown}{cmyk}{0,0.81,1,0.60}
+\definecolor{OliveGreen}{cmyk}{0.64,0,0.95,0.40}
+\definecolor{CadetBlue}{cmyk}{0.62,0.57,0.23,0}
+\definecolor{lightlightgray}{gray}{0.9}
+
+\lstset{ %
+  backgroundcolor=\color{lightlightgray},
+  basicstyle=\scriptsize\ttfamily,
+  breakatwhitespace=false,
+  breaklines=false,
+  language=C++,
+  %deletekeywords={...},
+  morekeywords={transpose},
+  escapeinside={\%*}{*)}, % add LaTeX code inside code
+  extendedchars=true,
+  frame=filled,
+  numbers=left,
+  numbersep=5pt,
+  numberstyle=\tiny\color{gray},
+  commentstyle=\color{gray},
+  keywordstyle=\color{OliveGreen},
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stepnumber=1,
+  tabsize=4,
+}
+\renewcommand{\lstlistingname}{Code sample}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\let\emptyset\varnothing
+
+\def \noderad {0.8cm}
+

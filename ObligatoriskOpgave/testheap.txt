@@ -1,0 +1,10 @@
+Inky Pinky Blinky Clyde Luigi Mario Bowser
+0 2 5
+1 2 2
+5 6 88
+3 5 77
+2 4 40
+4 5 10
+2 3 8
+1 4 5
+testheap 6 1

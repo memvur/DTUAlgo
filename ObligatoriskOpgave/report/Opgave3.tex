@@ -1,0 +1,118 @@
+\section{Assignment 3}
+
+\subsection{Problem}
+
+The algortihm in this assignment should find a chain of 
+freinds from a given node in a social network. The chain
+length of the chain $t, t \geq 0$ is given as an integer, and starts 
+from an arbitrary node in the network $p$. The chain then 
+consists of all persons that can be reached from $p$ through
+at most $t$ relationship connections. An example such a chain
+can be seen in figure \ref{fig:tvenner}
+
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=0.7, auto,swap]
+    \coordinate (c0) at (3, 0);
+    \coordinate (c1) at (-3, -3);
+    \coordinate (c2) at (0, 0);
+    \coordinate (c3) at (3, -3);
+    \coordinate (c4) at (-3, 3);
+    \coordinate (c5) at (3, 3);
+    \coordinate (c6) at (0, 6);
+
+    \node[circle, draw, minimum size=\noderad] (v0) at (c0) {0};
+    \node[circle, draw, minimum size=\noderad] (v1) at (c1) {1};
+    \node[circle, draw, minimum size=\noderad] (v2) at (c2) {2};
+    \node[circle, draw, minimum size=\noderad] (v3) at (c3) {3};
+    \node[circle, draw, minimum size=\noderad] (v4) at (c4) {4};
+    \node[circle, draw, minimum size=\noderad] (v5) at (c5) {5};
+    \node[circle, draw, minimum size=\noderad] (v6) at (c6) {6};
+
+    \draw [-] (v1) -- (v2);
+    \draw [-] (v1) -- (v4);
+
+    \draw [-] (v2) -- (v3);
+    \draw [-] (v2) -- (v0);
+    \draw [-] (v2) -- (v4);
+    \draw [-] (v2) -- (v1);
+
+    \draw [-, very thick, color=red] (v3) .. controls (5,-1) and (5, 1) .. (v5);
+
+    \draw [-, very thick, color=red] (v4) -- (v5);
+
+    \draw [-, very thick, color=red] (v5) -- (v6);
+
+	\node[] at ($ (c6) + (2.0,0.0) $) {\small 0-friend};
+	\node[] at ($ (c5) + (2.0,0.0) $) {\small 1-friend};
+	\node[] at ($ (c4) + (0.0,1.0) $) {\small 2-friend};
+	\node[] at ($ (c3) + (2.0,0.0) $) {\small 2-friend};
+
+
+\end{tikzpicture}
+\caption{2-friend chain from node 6 \label{fig:tvenner}}
+\end{figure}
+
+
+
+\subsection{Algorithm}
+
+To solve this problem, an obvois candiate is the
+breadth-first search algorithm. In each iteration of this
+search, the newly discovered nodes are one edge further 
+away from the inital node. To accomplish teh desired result, 
+the algorithm just needs to keep track of iterations and
+stop whenever the iteration counter exeeds $t$, and then
+return all discovered nodes. The pseudocode can 
+be seen in figure \ref{fig:tvennerpcode}.
+
+\begin{figure}[ht]
+\hrule
+\vspace{0.2cm}
+{\centering  \textit{tvenner}}
+\vspace{0.2cm}
+\hrule
+\begin{algorithmic}
+\Function{tvenner}{P, V, p, t} 
+\State $G = $ \Call{incidentList}{P,V}
+\State Mark all nodes as undiscovered
+\State $Q = \{p\}$
+\While{$Q \neq \emptyset$ \textbf{and} $t \geq 0$}
+\State $L = \{\}$
+\For{all nodes $v \in Q$}
+	\State Mark $v$ as discovered
+	\For{All $u$ pointed to by $v$}
+		\State add $u$ to $L$
+	\EndFor
+\EndFor
+\State $Q = L$
+\State $t = t-1$
+\EndWhile
+\State \Return All marked notes
+\EndFunction
+\end{algorithmic}
+\hrule
+\caption{tvenner  \label{fig:tvennerpcode}}
+\end{figure}
+
+Instead of using a queue, this algorithm makes a temporary list 
+for each iteration. The reson for this is that, unlike the 
+regular Breadth-First algorithm, this needs finnish en entire 
+iteration on a depth-level at a time and must distinguish 
+each 'layer' of the graph.
+
+\subsection{Complexity}
+
+In the worst case of the algorithm, the runtime should be just as
+the breadth first, since $t$ would, if sufficiently large, not 
+affect how many nodes that needs to be searched. Thus the
+worst-case time would be $\Theta \left( P + V \right)$
+
+
+
+
+
+
+
+
