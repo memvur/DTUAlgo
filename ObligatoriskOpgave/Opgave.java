@@ -71,6 +71,64 @@ public class Opgave
   }
 
 
+  private int find(int[] p, int[] sz, int i){
+    while (i != p[i]){
+      i = p[i];
+    }
+    return i;
+  }
+
+  private void union(int[] p, int[] sz, int i, int j){
+    ri = this.find(p, i);
+    rj = this.find(p, j);
+    if (ri != rj){
+      if(sz[ri] < sz[rj]){
+        p[ri] = rj;
+        sz[rj] = sz[ri] + sz[rj];
+      } else {
+        p[rj] = ri;
+        sz[ri] = sz[ri] + sz[rj];
+      }
+
+    }
+  }
+
+  private void tvenner_union(String name_line, String[] relations, int ini, int p){
+    String[] personer = name_line.split("\\s");
+
+    int n_pers = personer.length;
+    ArrayList< ArrayList<Integer> > graph_list = new ArrayList< ArrayList<Integer> >(n_pers);
+    for (int i = 0; i < n_pers; i++) {
+      graph_list.add(new ArrayList<Integer>());
+    }
+    for (int i = 0; i < relations.length; i++){
+      String[] tokens = relations[i].split("\\s");
+      int a = Integer.parseInt(tokens[0]);
+      int b = Integer.parseInt(tokens[1]);
+      if (a <= n_pers && b <= n_pers){
+        graph_list.get(a).add(b);
+        graph_list.get(b).add(a);
+      }
+    }
+
+    int[] p_list = new int[n_pers];
+    int[] sz_list = new int[n_pers];
+    for(int i = 0; i < n_pers; i++){
+      p_list[i] = i;
+      sz_list[i] = 1;
+    }
+
+    boolean[] visited = new boolean[n_pers];
+    for (int t = 0; t < p; t++){
+      for (int i = 0; i < n_pers; i++){
+
+      }
+    }
+
+
+
+  }
+
   private void tvenner(String name_line, String[] relations, int ini, int p){
     String[] personer = name_line.split("\\s");
 
