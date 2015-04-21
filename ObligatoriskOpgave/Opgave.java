@@ -8,16 +8,27 @@ public class Opgave
     new Opgave().run();
   }
 
+
+  /*
+    BEGIN: Algorithm for assignment 4
+  */
   private void svagestevenskab(String name_line, String[] relations, int p1, int p2){
     String[] personer = name_line.split("\\s");
 
     int n_pers = personer.length;
 
+    /*
+      Setup meta data for nodes. 
+      This is the cost of reaching a given node
+      as well as what a certin node 'points' to.
+    */
     PriorityQueue<Integer> P = new PriorityQueue<Integer>();
     int[] pi_list = new int[n_pers];
     int[] d_list  = new int[n_pers];
     boolean taken[] = new boolean[n_pers];
 
+    // Build the graph with weighted edges
+    // an fill the priority queue
     ArrayList< ArrayList<Integer> > graph_list = new ArrayList< ArrayList<Integer> >(n_pers);
     for (int i = 0; i < n_pers; i++) {
       graph_list.add(new ArrayList<Integer>());
@@ -38,9 +49,9 @@ public class Opgave
       }
     }
 
+    // Run Dijkstras shortest path
     P.changeKey(p1, 0);
     d_list[p1] = 0;
-
     while (!P.isEmpty()){
       int u = P.extractMin();
       taken[u] = true; 
@@ -57,6 +68,11 @@ public class Opgave
       }
     }
 
+    /*
+      Find the reverse shortest path
+      And print the reverse path in reverse, 
+      thus, output the shortest path (or wekaest friendship chain)
+    */
     ArrayList<Integer> path = new ArrayList<Integer>();
     path.add(p2);
     int next_node;
@@ -69,10 +85,26 @@ public class Opgave
     System.out.print(personer[path.get(0)] + "\n");
 
   }
+  /*
+    END: Algorithm for assignment 4
+  */
 
+  /*
+    BEGIN: Algorithm for assignment 3
+  */
   private void tvenner(String name_line, String[] relations, int ini, int p){
+    /*
+      Some confusion in the naming.
+      Ini = the initial node (p from assignment)
+      p   = t (lenth of chain)
+    */
+
     String[] personer = name_line.split("\\s");
 
+
+    /*
+      Build the graph
+    */
     int n_pers = personer.length;
     ArrayList< ArrayList<Integer> > graph_list = new ArrayList< ArrayList<Integer> >(n_pers);
     for (int i = 0; i < n_pers; i++) {
@@ -88,12 +120,22 @@ public class Opgave
       }
     }
 
+
     boolean[] visited = new boolean[personer.length]; 
     ArrayList<Integer> kaede = new ArrayList<Integer>();
     ArrayList<Integer> next  = new ArrayList<Integer>();
+    // Start cheking the inital person
     next.add(ini);
+    // run to at most p (t) depth
     for (int i = 0; i <= p && next.size() > 0; i++){
       ArrayList<Integer> tmp_next = new ArrayList<Integer>();
+      /*
+        for all nodes to look at in next depth level
+        this checks if the node is already visited.
+        If it's not visited, it's marked, and all
+        the nodes it points to are added to the list 
+        of nodes to look at next.
+      */
       for (int j = 0; j < next.size(); j++){
         if (!visited[next.get(j)]) {
           kaede.add(next.get(j));
@@ -106,6 +148,7 @@ public class Opgave
       next = tmp_next;
     }
 
+    // print result
     for (int i = 0; i < kaede.size(); i++){
       String appended = i < kaede.size() - 1 ? " " : "\n";
       System.out.print( personer[kaede.get(i)] + appended);
@@ -113,11 +156,23 @@ public class Opgave
     }
 
   }
+  /*
+    END: Algorithm for assignment 3
+  */
 
+
+
+  /*
+    BEGIN: Algorithm for assignment 2
+  */
   private void taet_venskab(String names, String[] relations, String gruppe_string){
     // convert group of people into a list of integers
     String[] venskabs_kaede = gruppe_string.split("\\s");
     int[] kaede = null;
+
+    /*
+      Build integer list of people in teh close friendship
+    */
     if( venskabs_kaede.length > 2 ){
       kaede = new int[venskabs_kaede.length-1];
       for (int i = 1; i < venskabs_kaede.length; i++){
@@ -135,6 +190,7 @@ public class Opgave
       return;
     }
 
+    // Build the graph as an incident list
     int n_pers = names.split("\\s").length;
     ArrayList< ArrayList<Integer> > graph_list = new ArrayList< ArrayList<Integer> >(n_pers);
     for (int i = 0; i < n_pers; i++) {
@@ -150,7 +206,10 @@ public class Opgave
       }
     }
 
-    // Actual algorithm
+    /*
+      Check for every person in the close friendship
+      has a connection to all the others
+    */
     for (int i = 0; i < kaede.length-1; i++){
       for (int j = i+1; j < kaede.length; j++){
         if (kaede[i] <= n_pers && kaede[j] <= n_pers){
@@ -163,14 +222,22 @@ public class Opgave
     }
     System.out.println("ja");
     return;
-    // End of algorithm
 
   }
+  /*
+    END: Algorithm for assignment 2
+  */
 
+  /*
+    BEGIN: Algorithm for assignment 1
+  */
   private void calc_size(String names, String[] relations){
     String[] name_list = names.split("\\s");
     System.out.println(name_list.length + " " + relations.length);
   }
+  /*
+    END: Algorithm for assignment 1
+  */
 
 
   private void run() throws IOException {
