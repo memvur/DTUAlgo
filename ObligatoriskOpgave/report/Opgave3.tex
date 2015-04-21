@@ -3,11 +3,11 @@
 \subsection{Problem}
 
 The algortihm in this assignment should find a chain of 
-freinds from a given node in a social network. The chain
+freinds from a given node in a social network. The
 length of the chain $t, t \geq 0$ is given as an integer, and starts 
 from an arbitrary node in the network $p$. The chain then 
 consists of all persons that can be reached from $p$ through
-at most $t$ relationship connections. An example such a chain
+at most $t$ relationship connections. An example of such a chain
 can be seen in figure \ref{fig:tvenner}
 
 
@@ -61,7 +61,7 @@ can be seen in figure \ref{fig:tvenner}
 To solve this problem, an obvois candiate is the
 breadth-first search algorithm. In each iteration of this
 search, the newly discovered nodes are one edge further 
-away from the inital node. To accomplish teh desired result, 
+away from the inital node. To accomplish the desired result, 
 the algorithm just needs to keep track of iterations and
 stop whenever the iteration counter exeeds $t$, and then
 return all discovered nodes. The pseudocode can 
@@ -98,7 +98,7 @@ be seen in figure \ref{fig:tvennerpcode}.
 
 Instead of using a queue, this algorithm makes a temporary list 
 for each iteration. The reson for this is that, unlike the 
-regular Breadth-First algorithm, this needs finnish en entire 
+regular Breadth-First algorithm, this needs finnish an entire 
 iteration on a depth-level at a time and must distinguish 
 each 'layer' of the graph.
 

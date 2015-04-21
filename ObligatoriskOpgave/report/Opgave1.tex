@@ -1,4 +1,4 @@
-\section{Assignment 1}
+\section{Problem 1}
 
 \subsection{Problem}
 
@@ -51,11 +51,11 @@ operations. The number of realations, that is the size of $V$
 takes a constant number of operations per relation element. 
 Albiet not present in the algorithm itself, this would take
 $V$ operations to compute. The time complexity of the algorithm
-is then.
+is then, given $c_n$ as arbitrary constants.
 
 \begin{align*}
-T(P, V, N) &= \theta \left( V \right) + \theta \left( N \right)\\
-           &= \theta \left( V + N \right)
+T(P, V, N) &= c_1 \cdot N + c_2 \cdot |V|\\ 
+           &= \Theta \left( N + |V| \right)
 \end{align*}
 
 

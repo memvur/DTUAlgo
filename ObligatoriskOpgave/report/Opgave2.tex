@@ -103,27 +103,28 @@ inner-for loop can be seen much like how \textbf{BubbleSort}
 runs. The amount of times the inner-loops code is executed is
 
 \begin{align*}
-t-1 + t-2 + \dots + t-t &= \sum^{t-1}_{i=0} i \\
- & = \frac{t^2-t}{2} \in \Theta \left( t^2 \right)
+k-1 + k-2 + \dots + k-k &= \sum^{k-1}_{i=0} i \\
+ & = \frac{k^2-k}{2} \in \Theta \left( k^2 \right)
 \end{align*} 
 
 Inside the loop, the \textbf{if} statement checks if
 the incident list of index $i$ contains an edge to $person$
 $x_j$. In worst case, this would require traversing through 
-alledges of $G[X[i]]$, thus, this operation takes $deg(x_i)$.
-In a worst case scenario, would be $P$ as $x_i$ could
+alledges of $G[X[i]]$.
+In a worst case scenario, would be $|P|-1$ as $x_i$ could
 have at most once relation to all other persons in the 
 network.
 
 \begin{align*}
-T(P, V, N, t) &= \Theta \left( t^2 \cdot P \right)
+T(P, V, N, k) &= c_1 \cdot \frac{k^2-k}{2} \cdot c_2 \cdot \left( |P|-1 \right)\\
+&= \Theta \left( k^2 \cdot |P| \right)
 \end{align*}
 
-Again, this only accounts for the croe algorithm, and not 
+Again, this only accounts for the core algorithm, and not 
 the overhead of constructing the graph representation.\\
 
 If a matrix were used to represent the graph, the runtime could have
-been reduced to $\Theta \left( t^2 \right)$ due to random access
+been reduced to $\Theta \left( k^2 \right)$ due to random access
 lookup for edges. However, a matrix representation of the graph 
 prooved too costly regarding memory usage.
 
