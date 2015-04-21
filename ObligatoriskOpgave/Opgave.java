@@ -11,6 +11,7 @@ public class Opgave
 
   /*
     BEGIN: Algorithm for assignment 4
+    #########################################################
   */
   private void svagestevenskab(String name_line, String[] relations, int p1, int p2){
     String[] personer = name_line.split("\\s");
@@ -87,10 +88,12 @@ public class Opgave
   }
   /*
     END: Algorithm for assignment 4
+    #########################################################
   */
 
   /*
     BEGIN: Algorithm for assignment 3
+    #########################################################
   */
   private void tvenner(String name_line, String[] relations, int ini, int p){
     /*
@@ -158,12 +161,14 @@ public class Opgave
   }
   /*
     END: Algorithm for assignment 3
+    #########################################################
   */
 
 
 
   /*
     BEGIN: Algorithm for assignment 2
+    #########################################################
   */
   private void taet_venskab(String names, String[] relations, String gruppe_string){
     // convert group of people into a list of integers
@@ -226,10 +231,12 @@ public class Opgave
   }
   /*
     END: Algorithm for assignment 2
+    #########################################################
   */
 
   /*
     BEGIN: Algorithm for assignment 1
+    #########################################################
   */
   private void calc_size(String names, String[] relations){
     String[] name_list = names.split("\\s");
@@ -237,6 +244,7 @@ public class Opgave
   }
   /*
     END: Algorithm for assignment 1
+    #########################################################
   */
 
 

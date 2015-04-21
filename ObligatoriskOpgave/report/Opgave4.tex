@@ -1,4 +1,4 @@
-\section{Assignment 4}
+\section{Problem 4}
 
 \subsection{Problem}
 
@@ -98,8 +98,11 @@ be seen in figure \ref{fig:shortpathcode}.
 
 Folowing the path adds at most $P$ operations, and so does revering.
 Thus besides from the Dijkstra's algorithm itself, only $2P$ operations
-are added. Thus, he runtime is: $T(P, V, p1, p2) = \Theta \left( V + P \right)$
+are added. Thus, he runtime is: 
 
-
+\begin{align*}
+T(P, V, p1, p2) &= T_{Dijkstra} \left( G, p1 \right) + c_1 \cdot 2 |P|\\
+ &= \Theta \left( |P| + |V| \right)
+\end{align*}
 
 
